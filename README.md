@@ -147,6 +147,29 @@ REPL 渲染 (终端交互界面)
 
 ## 开发指南
 
+### API 配置
+
+项目支持多种 API 认证方式（按优先级排序）：
+
+1. **环境变量** `ANTHROPIC_API_KEY`
+   ```bash
+   export ANTHROPIC_API_KEY=your_api_key_here
+   bun run dev
+   ```
+
+2. **配置文件** `~/.claude/settings.json`
+   ```json
+   {
+     "apiKeyHelper": "/path/to/your/api_key_script.sh"
+   }
+   ```
+
+3. **OAuth 认证** - 通过 `CLAUDE_CODE_OAUTH_TOKEN` 环境变量
+
+4. **macOS Keychain** - 自动从系统钥匙串读取
+
+配置目录默认为 `~/.claude/`，可通过 `CLAUDE_CONFIG_DIR` 环境变量自定义。
+
 ### 开发命令
 
 ```bash
@@ -180,3 +203,7 @@ bun run version
 ### 技术说明
 
 本项目为重构版本，部分原生模块使用 `shims/` 目录中的兼容实现替代。开发时请注意兼容性处理。
+
+### 所有权/隶属关系免责声明
+本仓库不声称拥有 Claude Code 原始源代码的所有权。
+本仓库与 Anthropic 公司没有任何关联，也未获得其认可或维护。
