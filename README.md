@@ -71,7 +71,20 @@ REPL 渲染 (终端交互界面)
 
 **测试宠物系统（无需 API）**
 ```bash
+# 完整测试套件
 bun run test-buddy-full.ts
+
+# 交互式孵化体验
+bun run interactive-pet.ts
+
+# 抽卡模式（一次孵化 5 只）
+bun run pet-gacha.ts
+
+# 展示所有 18 种物种
+bun run show-all-pets.ts
+
+# 寻找稀有宠物
+bun run rare-pets-showcase.ts
 ```
 
 **在 CLI 中使用**
