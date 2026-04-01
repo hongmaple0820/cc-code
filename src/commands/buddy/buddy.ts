@@ -63,8 +63,10 @@ const hatchCompanion: LocalCommandCall = async () => {
   }
 
   // Save to config
-  config.companion = storedCompanion
-  saveGlobalConfig(config)
+  saveGlobalConfig(current => ({
+    ...current,
+    companion: storedCompanion,
+  }))
 
   return {
     type: 'text',
@@ -129,7 +131,7 @@ const showStatus: LocalCommandCall = async () => {
   }
 }
 
-const buddyCall: LocalCommandCall = async (_context, args?: string) => {
+const buddyCall: LocalCommandCall = async (args, _context) => {
   const trimmedArgs = args?.trim() || ''
 
   // If no args, show help
@@ -170,4 +172,4 @@ const buddy = {
 } satisfies Command
 
 export default buddy
-export { hatchCompanion, petCompanion, showStatus }
+export { hatchCompanion, petCompanion, showStatus, buddyCall }
