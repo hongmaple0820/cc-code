@@ -4,20 +4,39 @@
 
 宠物伴侣功能已经完全实现并集成到 Claude Code CLI 中。
 
-**重要提示**：宠物功能已**始终启用**，无需特殊配置或环境变量！
+**重要提示**：宠物功能已**始终启用**！
 
 ## 🚀 如何启动
 
-### 方法 1：直接运行（推荐）
+### 方法 1：使用宠物启动脚本（推荐 - 会显示宠物精灵）
 ```bash
+bun run start-with-buddy.ts
+```
+或直接在 Windows 上运行：
+```bash
+start-with-pet.bat
+```
+
+### 方法 2：手动设置环境变量
+```bash
+# Linux/Mac
+export ENABLE_FULLSCREEN=1
+bun run dev
+
+# Windows PowerShell
+$env:ENABLE_FULLSCREEN="1"
+bun run dev
+
+# Windows CMD
+set ENABLE_FULLSCREEN=1
 bun run dev
 ```
 
-### 方法 2：使用便捷脚本
+### 方法 3：直接运行（命令可用，但不显示宠物精灵）
 ```bash
-bun run buddy
+bun run dev
 ```
-这只是启动 CLI 的快捷方式，宠物功能现在在任何启动方式下都可用。
+这种方式 `/buddy` 命令仍然可用，只是不会在界面上显示宠物精灵。
 
 ## 🎮 使用宠物命令
 

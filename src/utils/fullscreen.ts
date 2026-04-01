@@ -125,7 +125,7 @@ export function isFullscreenEnvEnabled(): boolean {
     }
     return false
   }
-  return process.env.USER_TYPE === 'ant'
+  return process.env.USER_TYPE === 'ant' || process.env.ENABLE_FULLSCREEN === '1'
 }
 
 /**

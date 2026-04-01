@@ -1,10 +1,12 @@
 #!/usr/bin/env bun
 /**
- * Start Claude Code CLI with BUDDY (pet) feature enabled
+ * Start Claude Code CLI with pet companion feature enabled
  *
- * Note: The BUDDY feature is now always enabled in this restored build.
- * This script is provided for convenience and backwards compatibility.
+ * Sets ENABLE_FULLSCREEN=1 to show the pet sprite in the terminal.
  */
+
+// Enable fullscreen mode for pet sprite display
+process.env.ENABLE_FULLSCREEN = '1'
 
 console.log('🐾 Starting Claude Code with Pet Mode enabled...\n')
 console.log('✨ Buddy commands are now always available!')

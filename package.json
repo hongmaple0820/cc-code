@@ -18,7 +18,8 @@
     "dev": "bun run ./src/dev-entry.ts",
     "start": "bun run ./src/dev-entry.ts",
     "version": "bun run ./src/dev-entry.ts --version",
-    "buddy": "bun run ./start-with-buddy.ts"
+    "buddy": "bun run ./start-with-buddy.ts",
+    "pet": "bun run ./pet-cli.ts"
   },
   "dependencies": {
     "@alcalzone/ansi-tokenize": "*",
