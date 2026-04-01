@@ -65,6 +65,37 @@ REPL 渲染 (终端交互界面)
 
 ## 核心功能
 
+### 🐾 宠物伴侣系统 (Buddy System)
+
+项目内置了一个有趣的宠物伴侣系统，可以在 CLI 中陪伴你编程。
+
+**测试宠物系统（无需 API）**
+```bash
+bun run test-buddy-full.ts
+```
+
+**在 CLI 中使用**
+```bash
+# 启动带宠物功能的 CLI
+bun run launch-with-proxy.ts
+
+# 在 CLI 中使用命令
+/buddy hatch    # 孵化获取宠物
+/buddy pet      # 抚摸宠物
+/buddy status   # 查看宠物状态
+```
+
+**宠物特性**
+- 18 种物种：duck, goose, blob, cat, dragon, octopus, owl, penguin, turtle, snail, ghost, axolotl, capybara, cactus, robot, rabbit, mushroom, chonk
+- 5 种稀有度：
+  - common (60%)
+  - uncommon (25%)
+  - rare (10%)
+  - epic (4%)
+  - legendary (1%)
+- 随机属性：DEBUGGING, PATIENCE, CHAOS, WISDOM, SNARK
+- 个性化：随机名字、性格、眼睛样式、帽子配饰
+
 ### 1. 工具系统 (50+ 工具)
 
 **文件操作**
