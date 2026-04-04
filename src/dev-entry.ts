@@ -2,6 +2,36 @@ import pkg from '../package.json'
 import { existsSync, readdirSync, readFileSync } from 'fs'
 import { dirname, extname, join, resolve } from 'path'
 
+// Set up git-bash path for Windows if not already set
+if (process.platform === 'win32' && !process.env.CLAUDE_CODE_GIT_BASH_PATH) {
+  const possiblePaths = [
+    'D:\\Program Files\\Git\\usr\\bin\\bash.exe',
+    'C:\\Program Files\\Git\\usr\\bin\\bash.exe',
+    'C:\\msys64\\usr\\bin\\bash.exe',
+  ]
+  for (const path of possiblePaths) {
+    if (existsSync(path)) {
+      process.env.CLAUDE_CODE_GIT_BASH_PATH = path
+      console.log(`[dev-entry.ts] Set CLAUDE_CODE_GIT_BASH_PATH=${path}`)
+      break
+    }
+  }
+}
+
+// Enable BUDDY feature flag for pet mode
+if (!process.env.CLAUDE_INTERNAL_FC_OVERRIDES) {
+  process.env.CLAUDE_INTERNAL_FC_OVERRIDES = JSON.stringify({
+    'BUDDY': true,
+  })
+  console.log('[dev-entry.ts] Enabled BUDDY feature flag')
+}
+
+// Enable fullscreen mode for pet sprite display
+if (!process.env.ENABLE_FULLSCREEN) {
+  process.env.ENABLE_FULLSCREEN = '1'
+  console.log('[dev-entry.ts] Enabled fullscreen mode for pet sprite display')
+}
+
 type MacroConfig = {
   VERSION: string
   BUILD_TIME: string

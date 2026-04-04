@@ -27,6 +27,12 @@ if (!process.env.CLAUDE_INTERNAL_FC_OVERRIDES) {
   console.log('[launch.ts] Enabled BUDDY feature flag');
 }
 
+// Enable fullscreen mode for pet sprite display
+if (!process.env.ENABLE_FULLSCREEN) {
+  process.env.ENABLE_FULLSCREEN = '1';
+  console.log('[launch.ts] Enabled fullscreen mode for pet sprite display');
+}
+
 // Set up MACRO global like the real app would
 type MacroConfig = {
   VERSION: string;
