@@ -47,7 +47,13 @@ import teleport from './commands/teleport/index.js'
 /* eslint-disable @typescript-eslint/no-require-imports */
 const agentsPlatform =
   process.env.USER_TYPE === 'ant'
-    ? require('./commands/agents-platform/index.js').default
+    ? (() => {
+        try {
+          return require('./commands/agents-platform/index.js').default
+        } catch {
+          return null
+        }
+      })()
     : null
 /* eslint-enable @typescript-eslint/no-require-imports */
 import securityReview from './commands/security-review.js'
@@ -61,64 +67,162 @@ import { feature } from 'bun:bundle'
 /* eslint-disable @typescript-eslint/no-require-imports */
 const proactive =
   feature('PROACTIVE') || feature('KAIROS')
-    ? require('./commands/proactive.js').default
+    ? (() => {
+        try {
+          return require('./commands/proactive.js').default
+        } catch {
+          return null
+        }
+      })()
     : null
 const briefCommand =
   feature('KAIROS') || feature('KAIROS_BRIEF')
-    ? require('./commands/brief.js').default
+    ? (() => {
+        try {
+          return require('./commands/brief.js').default
+        } catch {
+          return null
+        }
+      })()
     : null
 const assistantCommand = feature('KAIROS')
-  ? require('./commands/assistant/index.js').default
+  ? (() => {
+      try {
+        return require('./commands/assistant/index.js').default
+      } catch {
+        return null
+      }
+    })()
   : null
 const bridge = feature('BRIDGE_MODE')
-  ? require('./commands/bridge/index.js').default
+  ? (() => {
+      try {
+        return require('./commands/bridge/index.js').default
+      } catch {
+        return null
+      }
+    })()
   : null
 const remoteControlServerCommand =
   feature('DAEMON') && feature('BRIDGE_MODE')
-    ? require('./commands/remoteControlServer/index.js').default
+    ? (() => {
+        try {
+          return require('./commands/remoteControlServer/index.js').default
+        } catch {
+          return null
+        }
+      })()
     : null
 const voiceCommand = feature('VOICE_MODE')
-  ? require('./commands/voice/index.js').default
+  ? (() => {
+      try {
+        return require('./commands/voice/index.js').default
+      } catch {
+        return null
+      }
+    })()
   : null
 const forceSnip = feature('HISTORY_SNIP')
-  ? require('./commands/force-snip.js').default
+  ? (() => {
+      try {
+        return require('./commands/force-snip.js').default
+      } catch {
+        return null
+      }
+    })()
   : null
 const workflowsCmd = feature('WORKFLOW_SCRIPTS')
-  ? (
-      require('./commands/workflows/index.js') as typeof import('./commands/workflows/index.js')
-    ).default
+  ? (() => {
+      try {
+        return (
+          require('./commands/workflows/index.js') as typeof import('./commands/workflows/index.js')
+        ).default
+      } catch {
+        return null
+      }
+    })()
   : null
 const webCmd = feature('CCR_REMOTE_SETUP')
-  ? (
-      require('./commands/remote-setup/index.js') as typeof import('./commands/remote-setup/index.js')
-    ).default
+  ? (() => {
+      try {
+        return (
+          require('./commands/remote-setup/index.js') as typeof import('./commands/remote-setup/index.js')
+        ).default
+      } catch {
+        return null
+      }
+    })()
   : null
 const clearSkillIndexCache = feature('EXPERIMENTAL_SKILL_SEARCH')
-  ? (
-      require('./services/skillSearch/localSearch.js') as typeof import('./services/skillSearch/localSearch.js')
-    ).clearSkillIndexCache
+  ? (() => {
+      try {
+        return (
+          require('./services/skillSearch/localSearch.js') as typeof import('./services/skillSearch/localSearch.js')
+        ).clearSkillIndexCache
+      } catch {
+        return null
+      }
+    })()
   : null
 const subscribePr = feature('KAIROS_GITHUB_WEBHOOKS')
-  ? require('./commands/subscribe-pr.js').default
+  ? (() => {
+      try {
+        return require('./commands/subscribe-pr.js').default
+      } catch {
+        return null
+      }
+    })()
   : null
 const ultraplan = feature('ULTRAPLAN')
-  ? require('./commands/ultraplan.js').default
+  ? (() => {
+      try {
+        return require('./commands/ultraplan.js').default
+      } catch {
+        return null
+      }
+    })()
   : null
-const torch = feature('TORCH') ? require('./commands/torch.js').default : null
+const torch = feature('TORCH')
+  ? (() => {
+      try {
+        return require('./commands/torch.js').default
+      } catch {
+        return null
+      }
+    })()
+  : null
 const peersCmd = feature('UDS_INBOX')
-  ? (
-      require('./commands/peers/index.js') as typeof import('./commands/peers/index.js')
-    ).default
+  ? (() => {
+      try {
+        return (
+          require('./commands/peers/index.js') as typeof import('./commands/peers/index.js')
+        ).default
+      } catch {
+        return null
+      }
+    })()
   : null
 const forkCmd = feature('FORK_SUBAGENT')
-  ? (
-      require('./commands/fork/index.js') as typeof import('./commands/fork/index.js')
-    ).default
+  ? (() => {
+      try {
+        return (
+          require('./commands/fork/index.js') as typeof import('./commands/fork/index.js')
+        ).default
+      } catch {
+        return null
+      }
+    })()
   : null
-// BUDDY feature - always enabled for restored build
-const buddy = (
-  require('./commands/buddy/index.js') as typeof import('./commands/buddy/index.js')
-).default
+// BUDDY feature - try to load
+const buddy = (() => {
+  try {
+    return (
+      require('./commands/buddy/index.js') as typeof import('./commands/buddy/index.js')
+    ).default
+  } catch {
+    return null
+  }
+})()
 /* eslint-enable @typescript-eslint/no-require-imports */
 import thinkback from './commands/thinkback/index.js'
 import thinkbackPlay from './commands/thinkback-play/index.js'

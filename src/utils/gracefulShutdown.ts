@@ -191,6 +191,7 @@ function printResumeHint(): void {
  * In that case, fall back to SIGKILL which always works.
  */
 function forceExit(exitCode: number): never {
+  const stack = new Error('forceExit stack').stack
   // Clear failsafe timer since we're exiting now
   if (failsafeTimer !== undefined) {
     clearTimeout(failsafeTimer)
@@ -402,6 +403,7 @@ export async function gracefulShutdown(
     return
   }
   shutdownInProgress = true
+  const stack = new Error('gracefulShutdown stack').stack
 
   // Resolve the SessionEnd hook budget before arming the failsafe so the
   // failsafe can scale with it. Without this, a user-configured 10s hook

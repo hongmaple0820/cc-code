@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"bun run dev 2>&1\",\"timeout\":10000,\"description\":\"Test TTY check without args\"}",
+  "error": "Exit code 1\n$ bun run ./src/dev-entry.ts\n╔════════════════════════════════════════════════════════════════╗\n║  ERROR: Interactive mode requires a TTY terminal              ║\n╠════════════════════════════════════════════════════════════════╣\n║  On Windows, this can happen when:                           ║\n║  • Running through VSCode integrated terminal                  ║\n║  • Running through a subprocess without proper TTY inheritance ║\n║                                                           ...",
+  "timestamp": "2026-04-08T09:58:02.868Z",
+  "retry_count": 2
+}

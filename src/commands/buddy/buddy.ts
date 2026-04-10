@@ -1,11 +1,13 @@
 /**
  * Buddy command implementation
- * Allows users to interact with their companion pet
+ * Allows users to interact with their companion pet and AI features
  */
 import type { Command, LocalCommandCall } from '../../types/command.js'
 import { getGlobalConfig, saveGlobalConfig } from '../../utils/config.js'
 import { roll, companionUserId } from '../../buddy/companion.js'
 import type { StoredCompanion } from '../../buddy/types.js'
+import { activateBuddy, deactivateBuddy, isBuddyActive, getBuddyStatus, recordBuddyBreak } from '../../integrations/buddy/BuddyIntegration.js'
+import { isFeatureEnabled } from '../../core/featureFlags.js'
 
 // Pet name generator - simple fun names
 const PET_NAME_PREFIXES = ['Buddy', 'Pal', 'Chip', 'Pip', 'Dot', 'Pix', 'Mochi', 'Puff', 'Bean', 'Nugget']
@@ -131,6 +133,76 @@ const showStatus: LocalCommandCall = async () => {
   }
 }
 
+// AI Enhanced features
+const aiEnhancedCall: LocalCommandCall = async (args, _context) => {
+  const trimmedArgs = args?.trim() || ''
+  const parts = trimmedArgs.split(' ')
+  const subcommand = parts[0]?.toLowerCase()
+
+  // Check if AI feature is enabled
+  if (!isFeatureEnabled('BUDDY')) {
+    return {
+      type: 'text',
+      value: '❌ Buddy AI feature is disabled. Set CLAUDE_CODE_ENABLE_BUDDY=1 to enable.',
+    }
+  }
+
+  switch (subcommand) {
+    case 'on':
+    case 'enable': {
+      if (isBuddyActive()) {
+        return { type: 'text', value: 'Buddy AI is already active.' }
+      }
+      activateBuddy()
+      return {
+        type: 'text',
+        value: '✅ Buddy AI enhanced mode activated! I\'ll celebrate your wins and track your progress.',
+      }
+    }
+
+    case 'off':
+    case 'disable': {
+      if (!isBuddyActive()) {
+        return { type: 'text', value: 'Buddy AI is already inactive.' }
+      }
+      deactivateBuddy()
+      return { type: 'text', value: '✅ Buddy AI enhanced mode deactivated.' }
+    }
+
+    case 'stats': {
+      const status = getBuddyStatus()
+      return {
+        type: 'text',
+        value: `📊 Productivity Stats:\n` +
+          `Current emotion: ${status.emotion}\n` +
+          `Files modified: ${status.metrics.filesModified}\n` +
+          `Tests run: ${status.metrics.testsRun}\n` +
+          `Session duration: ${Math.round(status.metrics.sessionDuration / 60000)} min`,
+      }
+    }
+
+    case 'break': {
+      recordBuddyBreak()
+      return { type: 'text', value: '☕ Break recorded. Take a moment to stretch!' }
+    }
+
+    default: {
+      // Toggle
+      const isActive = isBuddyActive()
+      if (isActive) {
+        deactivateBuddy()
+        return { type: 'text', value: '✅ Buddy AI enhanced mode deactivated.' }
+      } else {
+        activateBuddy()
+        return {
+          type: 'text',
+          value: '✅ Buddy AI enhanced mode activated! I\'ll celebrate your wins and track your progress.',
+        }
+      }
+    }
+  }
+}
+
 const buddyCall: LocalCommandCall = async (args, _context) => {
   const trimmedArgs = args?.trim() || ''
 
@@ -138,13 +210,24 @@ const buddyCall: LocalCommandCall = async (args, _context) => {
   if (!trimmedArgs) {
     return {
       type: 'text',
-      value: 'Buddy commands:\n  /buddy hatch - Get a new companion\n  /buddy pet - Pet your companion\n  /buddy status - View companion details',
+      value: 'Buddy commands:\n' +
+        '  /buddy hatch - Get a new companion\n' +
+        '  /buddy pet - Pet your companion\n' +
+        '  /buddy status - View companion details\n' +
+        '  /buddy ai - Toggle AI enhanced mode\n' +
+        '  /buddy ai stats - View productivity stats\n' +
+        '  /buddy ai break - Record a break',
     }
   }
 
   // Parse subcommand
   const parts = trimmedArgs.split(' ')
   const subcommand = parts[0]
+
+  // Handle AI enhanced commands
+  if (subcommand === 'ai') {
+    return aiEnhancedCall(parts.slice(1).join(' '), _context)
+  }
 
   switch (subcommand) {
     case 'hatch':
@@ -156,7 +239,7 @@ const buddyCall: LocalCommandCall = async (args, _context) => {
     default:
       return {
         type: 'text',
-        value: `Unknown subcommand "${subcommand}". Available: hatch, pet, status`,
+        value: `Unknown subcommand "${subcommand}". Available: hatch, pet, status, ai`,
       }
   }
 }
@@ -164,7 +247,7 @@ const buddyCall: LocalCommandCall = async (args, _context) => {
 const buddy = {
   type: 'local',
   name: 'buddy',
-  description: 'Interact with your companion pet',
+  description: 'Interact with your companion pet and AI features',
   aliases: ['pet', 'companion'],
   supportsNonInteractive: false,
   call: buddyCall,

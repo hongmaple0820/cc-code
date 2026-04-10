@@ -1,0 +1,254 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1775627662799,
+  "projectRoot": "E:\\project\\cc-code",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": ">=24.0.0",
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      },
+      {
+        "name": "TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "tsconfig.json"
+        ]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "react",
+        "version": "*",
+        "category": "frontend"
+      }
+    ],
+    "packageManager": "npm",
+    "runtime": "Node.js 24.0.0"
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": "npm run dev",
+    "scripts": {
+      "dev": "bun run ./src/dev-entry.ts",
+      "start": "bun run ./src/dev-entry.ts",
+      "version": "bun run ./src/dev-entry.ts --version",
+      "buddy": "bun run ./start-with-buddy.ts",
+      "pet": "bun run ./pet-cli.ts"
+    }
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": "type-based"
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "src"
+    ],
+    "gitBranches": null
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "imgs": {
+      "path": "imgs",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1775627662735,
+      "keyFiles": [
+        "preview.png",
+        "qun1.jpg"
+      ]
+    },
+    "shims": {
+      "path": "shims",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1775627662736,
+      "keyFiles": []
+    },
+    "src": {
+      "path": "src",
+      "purpose": "Source code",
+      "fileCount": 27,
+      "lastAccessed": 1775627662765,
+      "keyFiles": [
+        "commands.ts",
+        "context.ts",
+        "cost-tracker.ts",
+        "costHook.ts",
+        "dev-entry.ts"
+      ]
+    },
+    "vendor": {
+      "path": "vendor",
+      "purpose": "Third-party code",
+      "fileCount": 0,
+      "lastAccessed": 1775627662766,
+      "keyFiles": []
+    },
+    "_bmad": {
+      "path": "_bmad",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1775627662766,
+      "keyFiles": []
+    },
+    "src\\components": {
+      "path": "src\\components",
+      "purpose": "UI components",
+      "fileCount": 115,
+      "lastAccessed": 1775627662767,
+      "keyFiles": [
+        "AgentProgressLine.tsx",
+        "AntModelSwitchCallout.tsx",
+        "App.tsx"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "src\\main.tsx",
+      "accessCount": 39,
+      "lastAccessed": 1775628636590,
+      "type": "file"
+    },
+    {
+      "path": "src\\entrypoints\\cli.tsx",
+      "accessCount": 9,
+      "lastAccessed": 1775627679704,
+      "type": "file"
+    },
+    {
+      "path": "src",
+      "accessCount": 8,
+      "lastAccessed": 1775628618234,
+      "type": "directory"
+    },
+    {
+      "path": "src\\dev-entry.ts",
+      "accessCount": 8,
+      "lastAccessed": 1775642254464,
+      "type": "file"
+    },
+    {
+      "path": "src\\ink\\ink.tsx",
+      "accessCount": 4,
+      "lastAccessed": 1775628579344,
+      "type": "file"
+    },
+    {
+      "path": "src\\ink\\components\\App.tsx",
+      "accessCount": 3,
+      "lastAccessed": 1775630917764,
+      "type": "file"
+    },
+    {
+      "path": "src\\entrypoints\\init.ts",
+      "accessCount": 2,
+      "lastAccessed": 1775627822615,
+      "type": "file"
+    },
+    {
+      "path": "src\\utils\\plugins\\pluginLoader.ts",
+      "accessCount": 2,
+      "lastAccessed": 1775628561820,
+      "type": "file"
+    },
+    {
+      "path": "src\\replLauncher.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1775627970892,
+      "type": "file"
+    },
+    {
+      "path": "src\\interactiveHelpers.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1775628003103,
+      "type": "file"
+    },
+    {
+      "path": "src\\utils\\teleport\\api.ts",
+      "accessCount": 1,
+      "lastAccessed": 1775628240249,
+      "type": "file"
+    },
+    {
+      "path": "",
+      "accessCount": 1,
+      "lastAccessed": 1775628272289,
+      "type": "directory"
+    },
+    {
+      "path": "src\\integrations\\buddy\\BuddyIntegration.ts",
+      "accessCount": 1,
+      "lastAccessed": 1775628277651,
+      "type": "file"
+    },
+    {
+      "path": "src\\ink.ts",
+      "accessCount": 1,
+      "lastAccessed": 1775628352069,
+      "type": "file"
+    },
+    {
+      "path": "src\\ink\\root.ts",
+      "accessCount": 1,
+      "lastAccessed": 1775628367661,
+      "type": "file"
+    },
+    {
+      "path": "src\\ink",
+      "accessCount": 1,
+      "lastAccessed": 1775628376764,
+      "type": "directory"
+    },
+    {
+      "path": "src\\services\\mcp\\config.ts",
+      "accessCount": 1,
+      "lastAccessed": 1775628498553,
+      "type": "file"
+    },
+    {
+      "path": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\claude\\e--project-cc-code\\66a80160-bb10-40d2-b906-118b44c93a56\\tasks\\bmgkv0swz.output",
+      "accessCount": 1,
+      "lastAccessed": 1775628676794,
+      "type": "file"
+    },
+    {
+      "path": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\claude\\e--project-cc-code\\66a80160-bb10-40d2-b906-118b44c93a56\\tasks\\bh7zz05f2.output",
+      "accessCount": 1,
+      "lastAccessed": 1775630245640,
+      "type": "file"
+    },
+    {
+      "path": "package.json",
+      "accessCount": 1,
+      "lastAccessed": 1775630937247,
+      "type": "file"
+    },
+    {
+      "path": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\claude\\e--project-cc-code\\66a80160-bb10-40d2-b906-118b44c93a56\\tasks\\bf12vbdpb.output",
+      "accessCount": 1,
+      "lastAccessed": 1775631634307,
+      "type": "file"
+    },
+    {
+      "path": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\claude\\e--project-cc-code\\66a80160-bb10-40d2-b906-118b44c93a56\\tasks\\bvh42t8od.output",
+      "accessCount": 1,
+      "lastAccessed": 1775634131578,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}

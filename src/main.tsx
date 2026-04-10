@@ -6,6 +6,20 @@
 //    key) in parallel — isRemoteManagedSettingsEligible() otherwise reads them
 //    sequentially via sync spawn inside applySafeConfigEnvironmentVariables()
 //    (~65ms on every macOS startup)
+
+// Access MACRO from globalThis (set by dev-entry.ts)
+declare global {
+  var MACRO: {
+    VERSION: string;
+    BUILD_TIME: string;
+    PACKAGE_URL: string;
+    NATIVE_PACKAGE_URL: string;
+    VERSION_CHANGELOG: string;
+    ISSUES_EXPLAINER: string;
+    FEEDBACK_CHANNEL: string;
+  };
+}
+
 import { profileCheckpoint, profileReport } from './utils/startupProfiler.js';
 
 // eslint-disable-next-line custom-rules/no-top-level-side-effects
@@ -806,7 +820,7 @@ export async function main() {
   const hasPrintFlag = cliArgs.includes('-p') || cliArgs.includes('--print');
   const hasInitOnlyFlag = cliArgs.includes('--init-only');
   const hasSdkUrl = cliArgs.some(arg => arg.startsWith('--sdk-url'));
-  const isNonInteractive = hasPrintFlag || hasInitOnlyFlag || hasSdkUrl || !process.stdout.isTTY;
+  const isNonInteractive = !process.env.FORCE_INTERACTIVE && (hasPrintFlag || hasInitOnlyFlag || hasSdkUrl || !process.stdout.isTTY);
 
   // Stop capturing early input for non-interactive modes
   if (isNonInteractive) {
@@ -912,12 +926,18 @@ async function run(): Promise<CommanderCommand> {
   // not when displaying help. This avoids the need for env variable signaling.
   program.hook('preAction', async thisCommand => {
     profileCheckpoint('preAction_start');
+    // Enable config file reading — must happen before init() and before
+    // showSetupScreens() which calls getGlobalConfig(). In the original
+    // codebase this is called in cli.tsx, but our entry point skips that path.
+    const { enableConfigs } = await import('./utils/config.js');
+    enableConfigs();
     // Await async subprocess loads started at module evaluation (lines 12-20).
     // Nearly free — subprocesses complete during the ~135ms of imports above.
     // Must resolve before init() which triggers the first settings read
     // (applySafeConfigEnvironmentVariables → getSettingsForSource('policySettings')
     // → isRemoteManagedSettingsEligible → sync keychain reads otherwise ~65ms).
     await Promise.all([ensureMdmSettingsLoaded(), ensureKeychainPrefetchCompleted()]);
+    await init();
     profileCheckpoint('preAction_after_mdm');
     await init();
     profileCheckpoint('preAction_after_init');
