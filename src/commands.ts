@@ -223,6 +223,46 @@ const buddy = (() => {
     return null
   }
 })()
+// LONGTERM - persistent task engine (always enabled)
+const longterm = (() => {
+  try {
+    return (
+      require('./commands/longterm/index.js') as typeof import('./commands/longterm/index.js')
+    ).default
+  } catch {
+    return null
+  }
+})()
+// SKILLFORGE - auto-generate skills (always enabled)
+const skillforge = (() => {
+  try {
+    return (
+      require('./commands/skillforge/index.js') as typeof import('./commands/skillforge/index.js')
+    ).default
+  } catch {
+    return null
+  }
+})()
+// KNOWLEDGE - persistent knowledge base (always enabled)
+const knowledge = (() => {
+  try {
+    return (
+      require('./commands/knowledge/index.js') as typeof import('./commands/knowledge/index.js')
+    ).default
+  } catch {
+    return null
+  }
+})()
+// EVOLUTION - self-evolution feedback loop (always enabled)
+const evolution = (() => {
+  try {
+    return (
+      require('./commands/evolution/index.js') as typeof import('./commands/evolution/index.js')
+    ).default
+  } catch {
+    return null
+  }
+})()
 /* eslint-enable @typescript-eslint/no-require-imports */
 import thinkback from './commands/thinkback/index.js'
 import thinkbackPlay from './commands/thinkback-play/index.js'
@@ -423,6 +463,10 @@ const COMMANDS = memoize((): Command[] => [
   ...(webCmd ? [webCmd] : []),
   ...(forkCmd ? [forkCmd] : []),
   ...(buddy ? [buddy] : []),
+  ...(longterm ? [longterm] : []),
+  ...(skillforge ? [skillforge] : []),
+  ...(knowledge ? [knowledge] : []),
+  ...(evolution ? [evolution] : []),
   ...(proactive ? [proactive] : []),
   ...(briefCommand ? [briefCommand] : []),
   ...(assistantCommand ? [assistantCommand] : []),

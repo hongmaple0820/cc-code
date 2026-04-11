@@ -167,6 +167,10 @@ export const EventTypes = {
   AGENT_COMPLETED: 'agent:completed',
   AGENT_FAILED: 'agent:failed',
 
+  // Long-term task events
+  TASK_CREATED: 'task:created',
+  TASK_UPDATED: 'task:updated',
+
   // Bridge events
   BRIDGE_CONNECTED: 'bridge:connected',
   BRIDGE_DISCONNECTED: 'bridge:disconnected',

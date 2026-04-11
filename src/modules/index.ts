@@ -42,3 +42,57 @@ export {
   type OutputSummary,
   type CommandHistory,
 } from './smartshell/SmartShell.js'
+
+// Long-term Task Engine - Persistent task management
+export {
+  LongTermTaskEngine,
+  longTermTaskEngine,
+  LONG_TERM_TASK_ENGINE_TOKEN,
+} from './longterm/TaskEngine.js'
+
+export {
+  type LongTermTask,
+  type TaskState,
+  type TaskPriority,
+  type TaskQuery,
+  type TaskStats,
+  type CreateTaskOptions,
+  type Checkpoint,
+  type TaskStep,
+  type TaskMeta,
+} from './longterm/types.js'
+
+// Skill Forge - Auto-generate skills from codebase
+export {
+  SkillForge,
+  skillForge,
+  SKILL_FORGE_TOKEN,
+  type SkillForgeConfig,
+  type FileAnalysis,
+  type GeneratedSkill,
+  type CodePattern,
+  type PatternType,
+} from './skillforge/SkillForge.js'
+
+// Knowledge Base - Persistent knowledge consolidation
+export {
+  KnowledgeBase,
+  knowledgeBase,
+  KNOWLEDGE_BASE_TOKEN,
+  type KnowledgeEntry,
+  type KnowledgeType,
+  type KnowledgeQuery,
+  type KnowledgeStats,
+  type KnowledgeFeedback,
+} from './knowledgebase/KnowledgeBase.js'
+
+// Self-Evolution Engine - Feedback-driven adaptation
+export {
+  SelfEvolutionEngine,
+  selfEvolutionEngine,
+  SELF_EVOLUTION_ENGINE_TOKEN,
+  type AdaptiveSettings,
+  type BehaviorEvent,
+  type BehaviorPattern,
+  type BehaviorType,
+} from './selfevolution/SelfEvolutionEngine.js'
